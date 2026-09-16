@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg,
+                    #F4D98B 0%,
+                    #E8C96A 30%,
+                    #C89B5A 70%,
+                    #A8792E 100%);
+        }
+
+        .login-container {
+            width: 420px;
+            max-width: 100%;
+            background: #FFFDF6;
+            border-radius: 24px;
+            padding: 48px 44px;
+            box-shadow:
+                0 25px 60px rgba(88, 60, 18, 0.35),
+                0 4px 15px rgba(88, 60, 18, 0.15);
+            position: relative;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            border-radius: 0 0 5px 5px;
+            background: linear-gradient(90deg, #C89B5A, #E8C96A);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo {
+            width: 74px;
+            height: 74px;
+            margin: 0 auto 18px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #C89B5A, #A8792E);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(168, 121, 46, 0.35);
+        }
+
+        .login-logo svg {
+            width: 36px;
+            height: 36px;
+            color: #FFFDF6;
+        }
+
+        .login-header h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #5C4632;
+            margin-bottom: 6px;
+        }
+
+        .login-header p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: #9A8A6F;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #6B5A47;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper .icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #B9A88A;
+            pointer-events: none;
+            transition: color 0.3s;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 50px;
+            padding: 0 44px 0 46px;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            color: #5C4632;
+            background: #FFFFFF;
+            border: 1.5px solid #E5D9C3;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #C8BCA4;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #C89B5A;
+            box-shadow: 0 0 0 4px rgba(200, 155, 90, 0.15);
+        }
+
+        .input-wrapper input:focus ~ .icon {
+            color: #A8792E;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #B9A88A;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.3s;
+        }
+
+        .toggle-password:hover {
+            color: #A8792E;
+        }
+
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: linear-gradient(135deg, #C89B5A, #A8792E);
+            color: #FFFDF6;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(168, 121, 46, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(168, 121, 46, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary.loading {
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        .btn-primary .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255, 253, 246, 0.3);
+            border-top-color: #FFFDF6;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+
+        .btn-primary.loading .btn-text {
+            display: none;
+        }
+
+        .btn-primary.loading .spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 26px 0;
+            gap: 16px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E5D9C3;
+        }
+
+        .divider span {
+            font-size: 0.75rem;
+            color: #B9A88A;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .signup-link {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #9A8A6F;
+        }
+
+        .signup-link a {
+            color: #A8792E;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .signup-link a:hover {
+            color: #5C4632;
+        }
+
+        .role-group {
+            margin-bottom: 22px;
+        }
+
+        .role-group label.titulo {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #6B5A47;
+            margin-bottom: 10px;
+        }
+
+        .role-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .role-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .role-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .role-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 16px 12px;
+            background: #FFFFFF;
+            border: 1.5px solid #E5D9C3;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .role-card svg {
+            width: 24px;
+            height: 24px;
+            color: #B9A88A;
+            transition: color 0.3s;
+        }
+
+        .role-card span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #9A8A6F;
+            transition: color 0.3s;
+        }
+
+        .role-option input[type="radio"]:checked + .role-card {
+            border-color: #C89B5A;
+            background: #FFF9EC;
+            box-shadow: 0 0 0 4px rgba(200, 155, 90, 0.15);
+        }
+
+        .role-option input[type="radio"]:checked + .role-card svg {
+            color: #A8792E;
+        }
+
+        .role-option input[type="radio"]:checked + .role-card span {
+            color: #5C4632;
+        }
+
+        .role-option:hover .role-card {
+            border-color: #C89B5A;
+        }
+
+        .error-message {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #FDF0F0;
+            border: 1px solid #F0C4C4;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #B54545;
+            animation: slideDown 0.3s ease;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <line x1="20" y1="8" x2="20" y2="14" />
+                    <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
+            </div>
+            <h1>Criar conta</h1>
+            <p>Cadastre-se para acessar a plataforma.</p>
+        </div>
+
+        <div class="error-message" id="erro-msg"></div>
+
+        <form onsubmit="cadastrar(); return false;">
+
+            <div class="input-group">
+                <label for="nome">Nome completo</label>
+                <div class="input-wrapper">
+                    <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <div class="input-wrapper">
+                    <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    <input type="email" id="email" placeholder="voce@exemplo.com" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <div class="input-wrapper">
+                    <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    <input type="password" id="senha" placeholder="Minimo 6 caracteres" required>
+                    <button type="button" class="toggle-password" onclick="toggleSenha()" aria-label="Mostrar senha">
+                        <svg id="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        <svg id="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="display:none">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+                            <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                            <line x1="1" y1="1" x2="23" y2="23" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="role-group">
+                <label class="titulo">Voce e...</label>
+                <div class="role-options">
+                    <label class="role-option">
+                        <input type="radio" name="tipo_usuario" value="aluno" checked>
+                        <div class="role-card">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                            </svg>
+                            <span>Aluno</span>
+                        </div>
+                    </label>
+                    <label class="role-option">
+                        <input type="radio" name="tipo_usuario" value="professor">
+                        <div class="role-card">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                <path d="M2 17l10 5 10-5" />
+                                <path d="M2 12l10 5 10-5" />
+                            </svg>
+                            <span>Professor</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" id="btn-cadastro">
+                <span class="btn-text">Criar conta</span>
+                <div class="spinner"></div>
+            </button>
+
+            <div class="divider">
+                <span>ou</span>
+            </div>
+
+            <p class="signup-link">
+                Ja tem conta? <a href="login.html">Entrar</a>
+            </p>
+
+        </form>
+    </div>
+
+    <script>
+        function toggleSenha() {
+            const input = document.getElementById("senha");
+            const eyeOpen = document.getElementById("eye-open");
+            const eyeClosed = document.getElementById("eye-closed");
+
+            if (input.type === "password") {
+                input.type = "text";
+                eyeOpen.style.display = "none";
+                eyeClosed.style.display = "block";
+            } else {
+                input.type = "password";
+                eyeOpen.style.display = "block";
+                eyeClosed.style.display = "none";
+            }
+        }
+
+        function mostrarErro(msg) {
+            const el = document.getElementById("erro-msg");
+            el.textContent = msg;
+            el.classList.add("show");
+        }
+
+        function ocultarErro() {
+            document.getElementById("erro-msg").classList.remove("show");
+        }
+
+        async function cadastrar() {
+            ocultarErro();
+
+            var nome = document.getElementById("nome").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var senha = document.getElementById("senha").value;
+            var tipo_usuario = document.querySelector('input[name="tipo_usuario"]:checked');
+            var btn = document.getElementById("btn-cadastro");
+
+            if (!nome || !email || !senha) {
+                mostrarErro("Preencha todos os campos.");
+                return;
+            }
+
+            if (nome.split(/\s+/).filter(Boolean).length < 2) {
+                mostrarErro("Informe seu nome completo.");
+                return;
+            }
+
+            if (!/^\S+@\S+$/.test(email)) {
+                mostrarErro("Informe um e-mail valido.");
+                return;
+            }
+
+            if (senha.length < 6) {
+                mostrarErro("A senha deve ter pelo menos 6 caracteres.");
+                return;
+            }
+
+            var tipo = tipo_usuario ? tipo_usuario.value : "aluno";
+
+            btn.classList.add("loading");
+
+            var api = "http://" + (window.location.hostname || "localhost") + ":3000";
+
+            try {
+                const resposta = await fetch(api + "/cadastro", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nome, email, senha, tipo_usuario: tipo })
+                });
+
+                const dados = await resposta.json();
+
+                if (dados.success) {
+                    if (dados.token) {
+                        localStorage.setItem("token", dados.token);
+                    }
+                    window.location.href = "index.html";
+                } else {
+                    mostrarErro(dados.message || "Nao foi possivel cadastrar.");
+                    btn.classList.remove("loading");
+                }
+            } catch (erro) {
+                mostrarErro("Nao foi possivel conectar ao servidor. Verifique se ele esta rodando.");
+                btn.classList.remove("loading");
+            }
+        }
+    </script>
+</body>
+
+</html>

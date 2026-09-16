@@ -1,0 +1,333 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+
+    min-height: 100vh;
+
+    padding: 60px 10%;
+
+    overflow-x: hidden;
+
+    font-family:
+        Georgia, 'Times New Roman', Times, serif;
+
+    background:
+        linear-gradient(135deg,
+            #fff7d6,
+            #ffe8a3,
+            #ffd166,
+            #fff0c9);
+
+    background-size: 400% 400%;
+
+    animation: fundoAnimado 15s ease infinite;
+
+    position: relative;
+}
+
+
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(255, 255, 255, 0.45),
+            transparent 40%),
+
+        radial-gradient(circle at bottom right,
+            rgba(255, 255, 255, 0.25),
+            transparent 40%);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+
+@keyframes fundoAnimado {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+.titulo {
+
+    text-align: center;
+
+    font-size: 3.5rem;
+
+    color: #5c3b00;
+
+    margin-bottom: 20px;
+}
+
+
+
+.cards-container {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 35px;
+}
+
+
+
+.card {
+
+    position: relative;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(12px);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 35px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.15);
+
+    cursor: pointer;
+}
+
+
+
+.card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -120%;
+    left: -120%;
+
+    width: 250%;
+    height: 250%;
+
+    background:
+        linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+
+    transform: rotate(25deg);
+
+    transition: 0.8s;
+}
+
+.card:hover::before {
+
+    top: 100%;
+    left: 100%;
+}
+
+
+
+.card:hover {
+
+    transform:
+        translateY(-12px) scale(1.03);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.mini-card img {
+
+
+    width: 300px;
+    height: 410px;
+    text-align: center;
+    margin-right: 30px;
+
+}
+
+.card:hover img {
+
+    transform: scale(1.08);
+}
+
+
+
+.card-conteudo {
+
+    padding: 25px;
+}
+
+.card-conteudo h2 {
+
+    color: #5c3b00;
+
+    margin-bottom: 15px;
+
+    font-size: 2rem;
+}
+
+.card-conteudo p {
+
+    line-height: 1.8;
+
+    margin-bottom: 25px;
+
+    color: #4b3a22;
+}
+
+
+
+.card-conteudo a {
+
+    text-decoration: none;
+}
+
+.card-conteudo button {
+
+    padding: 14px 22px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #F8E7A2;
+
+    color: #5c3b00;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.4s ease;
+}
+
+.card-conteudo button:hover {
+
+    background: #fff4b5;
+
+    transform:
+        translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.reveal {
+
+    opacity: 0;
+
+    transform: translateY(100px);
+
+    transition: 1s all ease;
+}
+
+.reveal.active {
+
+    opacity: 1;
+
+    transform: translateY(0px);
+}
+
+
+
+@media(max-width:900px) {
+
+    .titulo {
+        font-size: 2.5rem;
+    }
+
+    .card img {
+        height: 200px;
+    }
+}
+
+
+
+.estrela {
+
+    width: 10px;
+    height: 10px;
+
+    background: #FFD166;
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    animation: sumir 0.7s linear forwards;
+}
+
+@keyframes sumir {
+
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px;
+    font-size: 14px;
+
+}
+
+.mini-car{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mini-car img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    padding: 10px;
+   
+
+}
