@@ -5,6 +5,11 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 body {
 
     min-height: 100vh;
@@ -273,6 +278,53 @@ body::before {
 
     .card img {
         height: 200px;
+    }
+
+    .mini-card img {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media(max-width:480px) {
+
+    body {
+        padding: 40px 5%;
+    }
+
+    .titulo {
+        font-size: 2rem;
+    }
+
+    .areas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card-conteudo {
+        padding: 20px;
+    }
+
+    .card-conteudo h2 {
+        font-size: 1.6rem;
+    }
+
+    .mini-card img {
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0;
+    }
+
+    .mini-car img {
+        width: 100%;
+        max-width: 280px;
+        padding: 10px;
     }
 }
 

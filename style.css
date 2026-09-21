@@ -9,6 +9,11 @@ html {
   scroll-behavior: smooth;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   background-color: #F8E7A2;
   background-size: cover;
@@ -275,6 +280,99 @@ section {
 }
 
 
+@media(max-width:768px) {
+
+  .hero {
+    padding: 60px 6%;
+    gap: 40px;
+  }
+
+  section {
+    padding: 70px 6%;
+  }
+
+  .titulo {
+    font-size: 2.5rem;
+  }
+
+  .pooh {
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+
+  .formacao-card,
+  .ppe-card,
+  .contato-card {
+    padding: 35px;
+  }
+
+}
+
+@media(max-width:480px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero {
+    padding: 50px 5%;
+  }
+
+  .hero-texto h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-texto h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero-texto h3 {
+    font-size: 1.3rem;
+  }
+
+  .hero-texto p {
+    font-size: 1rem;
+  }
+
+  .hero-imagem img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-botoes button {
+    width: 100%;
+  }
+
+  section {
+    padding: 60px 4%;
+  }
+
+  .titulo {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .areas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eixos {
+    grid-template-columns: 1fr;
+  }
+
+  .sobre-img img {
+    width: 180px;
+  }
+
+  .formacao-card,
+  .ppe-card,
+  .contato-card {
+    padding: 25px;
+  }
+
+}
+
+
 
 .formacao-card {
   background: rgba(255, 255, 255, 0.15);
@@ -408,11 +506,11 @@ html {
 }
 
 .ppe-card img {
-  width: 200%;
+  width: 100%;
 
   max-width: 500px;
 
-  height: 250px;
+  height: auto;
 
   object-fit: cover;
 
