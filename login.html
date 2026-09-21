@@ -427,6 +427,7 @@
         </form>
     </div>
 
+    <script src="usuarios.js"></script>
     <script>
         function toggleSenha() {
             const input = document.getElementById("senha");
@@ -468,26 +469,18 @@
 
             btn.classList.add("loading");
 
-            var api = "http://" + (window.location.hostname || "localhost") + ":3000";
-
             try {
-                const resposta = await fetch(api + "/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ login, senha })
-                });
+                var resultado = await window.Usuarios.autenticar(login, senha);
 
-                const dados = await resposta.json();
-
-                if (dados.success) {
-                    localStorage.setItem("token", dados.token);
+                if (resultado.success) {
+                    window.Usuarios.criarSessao(resultado.user);
                     window.location.href = "index.html";
                 } else {
-                    mostrarErro(dados.message || "Credenciais invalidas.");
+                    mostrarErro(resultado.message || "Credenciais invalidas.");
                     btn.classList.remove("loading");
                 }
             } catch (erro) {
-                mostrarErro("Nao foi possivel conectar ao servidor. Verifique se ele esta rodando.");
+                mostrarErro("Nao foi possivel fazer login. Tente novamente.");
                 btn.classList.remove("loading");
             }
         }
