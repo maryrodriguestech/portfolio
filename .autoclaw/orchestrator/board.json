@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-21T19:59:05.783Z",
+  "generated_at": "2026-09-21T20:08:35.999Z",
   "generator": "orchestrator-loop",
   "fleet_size": 1,
-  "live_count": 1,
+  "live_count": 0,
   "claimable": [],
   "in_flight": [],
   "awaiting_review": [],
